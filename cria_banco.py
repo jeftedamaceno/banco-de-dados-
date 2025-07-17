@@ -9,7 +9,7 @@ cursor.execute("""
 CREATE TABLE IF NOT EXISTS Clientes (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     nome TEXT NOT NULL,
-    email TEXT,
+    email TEXT UNIQUE,
     cidade TEXT,
     telefone TEXT
 );
