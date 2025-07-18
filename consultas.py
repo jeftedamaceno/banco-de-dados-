@@ -49,6 +49,36 @@ cursor.execute("""
 for linha in cursor.fetchall():
     print(linha)
 
+print("Top 5 Clientes:")
+cursor.execute("""
+    SELECT 
+        c.id,
+        c.nome,
+        SUM(ip.quantidade) AS total_itens_comprados
+    FROM Clientes c
+    JOIN Pedidos p ON c.id = p.cliente_id
+    JOIN ItensPedido ip ON p.id = ip.pedido_id
+    GROUP BY c.id, c.nome
+    ORDER BY total_itens_comprados DESC
+    LIMIT 5;
+""")
+for row in cursor.fetchall():
+    print(row)
+
+print("\nTop 5 Produtos:")
+cursor.execute("""
+    SELECT 
+        pr.id,
+        pr.nome,
+        SUM(ip.quantidade) AS total_vendido
+    FROM Produtos pr
+    JOIN ItensPedido ip ON pr.id = ip.produto_id
+    GROUP BY pr.id, pr.nome
+    ORDER BY total_vendido DESC
+    LIMIT 5;
+""")
+for row in cursor.fetchall():
+    print(row)
 
 conexao.close()
 

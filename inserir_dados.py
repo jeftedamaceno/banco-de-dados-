@@ -160,7 +160,7 @@ for i in range(10):  # 10 pedidos
         """, (pedido_id, produto_id, quantidade, preco_unitario))
 
 conexao.commit()
-conexao.close()
+
 
 print("Pedidos e itens inseridos com sucesso.")
 
